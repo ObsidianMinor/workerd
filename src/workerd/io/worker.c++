@@ -300,8 +300,11 @@ void addExceptionToTrace(jsg::Lock& js, IoContext &ioContext, WorkerTracer& trac
   KJ_IF_MAYBE(m, error.message) {
     message = kj::str(*m);
   }
-  // TODO(someday): Limit size of exception content?
-  tracer.addException(timestamp, kj::mv(name), kj::mv(message));
+  kj::String stack;
+  KJ_IF_MAYBE(s, error.stack) {
+    stack = kj::str(*s);
+  }
+  tracer.addException(timestamp, kj::mv(name), kj::mv(message), kj::mv(stack));
 }
 
 void reportStartupError(

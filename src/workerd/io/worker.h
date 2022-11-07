@@ -471,7 +471,8 @@ public:
     // Convenience struct for accessing typical Error properties.
     jsg::Optional<kj::String> name;
     jsg::Optional<kj::String> message;
-    JSG_STRUCT(name, message);
+    jsg::Optional<kj::String> stack;
+    JSG_STRUCT(name, message, stack);
   };
   virtual const jsg::TypeHandler<ErrorInterface>&
       getErrorInterfaceTypeHandler(jsg::Lock& lock) const = 0;

@@ -212,11 +212,13 @@ public:
   double getTimestamp();
   kj::StringPtr getName();
   kj::StringPtr getMessage();
+  kj::StringPtr getStack();
 
   JSG_RESOURCE_TYPE(TraceException) {
     JSG_READONLY_INSTANCE_PROPERTY(timestamp, getTimestamp);
     JSG_READONLY_INSTANCE_PROPERTY(message, getMessage);
     JSG_READONLY_INSTANCE_PROPERTY(name, getName);
+    JSG_READONLY_INSTANCE_PROPERTY(stack, getStack);
   }
 
 private:

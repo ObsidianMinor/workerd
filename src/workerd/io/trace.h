@@ -128,7 +128,7 @@ public:
 
   class Exception {
   public:
-    explicit Exception(kj::Date timestamp, kj::String name, kj::String message);
+    explicit Exception(kj::Date timestamp, kj::String name, kj::String message, kj::String stack);
     Exception(rpc::Trace::Exception::Reader reader);
     Exception(Exception&&) = default;
     KJ_DISALLOW_COPY(Exception);
@@ -139,7 +139,8 @@ public:
 
     kj::String name;
     kj::String message;
-    // TODO(someday): record exception source, line/column number, stack trace?
+    kj::String stack;
+    // TODO(someday): record exception source?
 
     void copyTo(rpc::Trace::Exception::Builder builder);
   };
@@ -449,7 +450,7 @@ public:
   // TODO(soon): Eventually:
   //void setMetrics(...) // Or get from MetricsCollector::Request directly?
 
-  void addException(kj::Date timestamp, kj::String name, kj::String message);
+  void addException(kj::Date timestamp, kj::String name, kj::String message, kj::String stack);
 
   void setEventInfo(kj::Date timestamp, Trace::EventInfo&&);
   // Adds info about the event that triggered the trace.  Must not be called more than once.

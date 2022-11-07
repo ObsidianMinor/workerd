@@ -233,6 +233,10 @@ kj::StringPtr TraceException::getName() {
   return exception.name;
 }
 
+kj::StringPtr TraceException::getStack() {
+  return exception.stack;
+}
+
 TraceMetrics::TraceMetrics(uint cpuTime, uint wallTime) : cpuTime(cpuTime), wallTime(wallTime) {}
 
 jsg::Ref<TraceMetrics> UnsafeTraceMetrics::fromTrace(jsg::Ref<TraceItem> item) {
